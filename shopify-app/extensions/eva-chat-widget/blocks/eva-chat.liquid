@@ -1,0 +1,84 @@
+{% comment %}
+  Eva Chat Widget Block
+  Este bloque carga el widget de chat en cualquier página del tema
+{% endcomment %}
+
+{% if block.settings.enabled %}
+  <!-- Eva Chat Widget -->
+  <div id="eva-chat-widget-container" data-position="{{ block.settings.position }}">
+    <!-- El widget se renderizará aquí -->
+  </div>
+
+  <!-- Script del widget -->
+  <script>
+    window.EvaWidgetConfig = {
+      shopDomain: '{{ shop.permanent_domain }}',
+      customerId: {% if customer %}{{ customer.id }}{% else %}null{% endif %},
+      welcomeMessage: {{ block.settings.welcome_message | json }},
+      primaryColor: '{{ block.settings.primary_color }}',
+      position: '{{ block.settings.position }}'
+    };
+  </script>
+
+  <!-- Cargar el bundle del widget -->
+  {{ 'eva-chat-widget.js' | asset_url | script_tag }}
+
+  <style>
+    /* Posicionamiento dinámico basado en configuración */
+    {% if block.settings.position == 'bottom-left' %}
+      .eva-chat-bubble,
+      .eva-chat-window {
+        right: auto !important;
+        left: 20px !important;
+      }
+    {% endif %}
+
+    /* Color personalizado */
+    :root {
+      --eva-primary-color: {{ block.settings.primary_color }};
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Eva Chat Widget",
+  "target": "body",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Habilitar chat",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "welcome_message",
+      "label": "Mensaje de bienvenida",
+      "default": "Hola! Soy Eva, tu asistente en depilación láser diodo. ¿En qué puedo ayudarte?"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Color principal",
+      "default": "#e91e63"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Posición del botón",
+      "options": [
+        {
+          "value": "bottom-right",
+          "label": "Abajo a la derecha"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Abajo a la izquierda"
+        }
+      ],
+      "default": "bottom-right"
+    }
+  ]
+}
+{% endschema %}

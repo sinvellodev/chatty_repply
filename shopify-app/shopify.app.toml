@@ -1,0 +1,27 @@
+# Learn more about configuring your Shopify app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "eva-chatbot"
+client_id = "YOUR_CLIENT_ID_HERE"
+application_url = "https://YOUR_APP_URL_HERE"
+embedded = true
+
+[access_scopes]
+# Shopify access scopes
+scopes = "write_products,read_products,read_orders,read_customers"
+
+[auth]
+redirect_urls = [
+  "https://YOUR_APP_URL_HERE/auth/callback",
+  "https://YOUR_APP_URL_HERE/auth/shopify/callback",
+  "https://YOUR_APP_URL_HERE/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "YOUR_DEV_STORE_URL_HERE.myshopify.com"

@@ -1,0 +1,39 @@
+api_version = "2024-01"
+
+[[extensions]]
+type = "theme_app_extension"
+name = "Eva Chat Widget"
+
+[extensions.settings]
+# Configuración de la extensión del tema
+[[extensions.settings.blocks]]
+type = "app_block"
+name = "Eva Chat Widget"
+
+[[extensions.settings.blocks.settings]]
+type = "checkbox"
+id = "enabled"
+label = "Habilitar chat"
+default = true
+
+[[extensions.settings.blocks.settings]]
+type = "text"
+id = "welcome_message"
+label = "Mensaje de bienvenida"
+default = "Hola! Soy Eva, tu asistente en depilación láser diodo. ¿En qué puedo ayudarte?"
+
+[[extensions.settings.blocks.settings]]
+type = "color"
+id = "primary_color"
+label = "Color principal"
+default = "#e91e63"
+
+[[extensions.settings.blocks.settings]]
+type = "select"
+id = "position"
+label = "Posición del botón"
+options = [
+  { label = "Abajo a la derecha", value = "bottom-right" },
+  { label = "Abajo a la izquierda", value = "bottom-left" }
+]
+default = "bottom-right"
